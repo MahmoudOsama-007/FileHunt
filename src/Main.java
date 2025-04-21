@@ -1,6 +1,7 @@
 import Strategy.*;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,6 +9,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         FileSearchContext context = new FileSearchContext();
+        File[] drives = File.listRoots(); //list of Available Drive
+        ArrayList<String> letters = new ArrayList<>();
 
         while (true) {
             System.out.println("Choose a search strategy:");
@@ -27,10 +30,16 @@ public class Main {
 
             System.out.print("Enter search query (word or filename): ");
             String query = scanner.nextLine();
-
+            //list Drive
+            for (File drive : drives) {
+                String letter = drive.getPath().substring(0, 1);
+                letters.add(letter);
+            }
+            // Join using OR
+            String result = String.join(" OR ", letters);
+            System.out.println(result);
             System.out.print("Enter Drive to search: ");
-            String path = scanner.nextLine();
-
+            String path = scanner.nextLine().toUpperCase(); // need to Validation if enter wrong Drive
             switch (choice) {
                 case 1:
                     context.setStrategy(new SequentialWordSearchStrategy());
