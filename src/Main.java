@@ -39,7 +39,7 @@ public class Main {
             String result = String.join(" OR ", letters);
             System.out.println(result);
             System.out.print("Enter Drive to search: ");
-            String path = scanner.nextLine().toUpperCase(); // need to Validation if enter wrong Drive
+            String path = scanner.nextLine().toUpperCase()+":\\"; // need to Validation if enter wrong Drive
             switch (choice) {
                 case 1:
                     context.setStrategy(new SequentialWordSearchStrategy());
