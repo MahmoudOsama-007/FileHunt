@@ -36,8 +36,6 @@ public class SequentialNameSearchStrategy implements SearchStrategy {
         }
     }
     private boolean filenameMatches(File file,String query) {
-        String fileNameLower = file.getName().toLowerCase();
-        String queryLower = query.toLowerCase();
-        return fileNameLower.contains(queryLower);
+        return file.getName().contains(query);
     }
 }
