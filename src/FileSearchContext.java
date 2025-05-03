@@ -1,6 +1,7 @@
 import Strategy.SearchStrategy;
 
-import java.io.File;
+
+import java.nio.file.Path;
 import java.util.List;
 
 public class FileSearchContext {
@@ -9,7 +10,7 @@ public class FileSearchContext {
     public void setStrategy(SearchStrategy strategy) {
         this.strategy = strategy;
     }
-    public List<File> search(String query, String path) {
+    public List<Path> search(String query, String path) {
         return strategy.search(query, path);
     }
 
