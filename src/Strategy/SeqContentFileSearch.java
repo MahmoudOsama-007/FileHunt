@@ -4,36 +4,33 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-public class SequentialWordSearchStrategy implements SearchStrategy {
+public class SeqContentFileSearch implements SearchStrategy {
 
     @Override
     public List<File> search(String query, String path) {
-        List<File> matchedFiles = new ArrayList<>();
         File root = new File(path);
-
         if (root.exists() && root.isDirectory()) {
-            searchDirectory(root,query,matchedFiles);
+            searchDirectory(root,query);
         } else {
             System.err.println("Invalid path: " + path);
         }
 
         return matchedFiles;
     }
-    private void searchDirectory(File dir,String query ,List<File> result) {
+    private void searchDirectory(File dir,String query) {
         File[] files = dir.listFiles();
 
         if (files == null) return;
 
         for (File file : files) {
             if (file.isDirectory()) {
-                searchDirectory(file,query ,result);  // Recursive call
+                searchDirectory(file,query);  // Recursive call
             } else {
                 if (containsQueryWord(file,query)) {
                    // System.out.println(file.getAbsolutePath()); // Test
-                    result.add(file);
+                    matchedFiles.add(file);
                 }
             }
         }

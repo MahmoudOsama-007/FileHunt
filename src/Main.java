@@ -42,16 +42,16 @@ public class Main {
             String path = scanner.nextLine().toUpperCase()+":\\"; // need to Validation if enter wrong Drive
             switch (choice) {
                 case 1:
-                    context.setStrategy(new SequentialWordSearchStrategy());
+                    context.setStrategy(new SeqContentFileSearch());
                     break;
                 case 2:
-                    context.setStrategy(new ParallelWordSearchStrategy());
+                    context.setStrategy(new ParallelContentFileSearch());
                     break;
                 case 3:
-                    context.setStrategy(new SequentialNameSearchStrategy());
+                    context.setStrategy(new SeqNameFileSearch());
                     break;
                 case 4:
-                    context.setStrategy(new ParallelNameSearchStrategy());
+                    context.setStrategy(new ParallelNameFileSearch());
                     break;
                 default:
                     System.out.println("Invalid choice.");
