@@ -13,8 +13,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
 public class ParallelContentFileSearch implements SearchStrategy {
-    public List<CompletableFuture<Path>> searchAsync(String query, String path){
-        try(Stream<Path> pathStream = Files.walk(Paths.get(path))) {
+    public List<CompletableFuture<Path>> searchAsync(String query, Path path){
+        try(Stream<Path> pathStream = Files.walk(path)) {
            return pathStream.map((p ->
                 CompletableFuture.supplyAsync(()->{
                     if (Files.isRegularFile(p) && containsQueryWord(p, query)) {
@@ -30,7 +30,7 @@ public class ParallelContentFileSearch implements SearchStrategy {
         }
     }
     @Override
-    public List<Path> search(String query, String path) {
+    public List<Path> search(String query, Path path) {
         return searchAsync(query,path).stream().map(CompletableFuture::join).filter(Objects::nonNull).toList();
     }
     private boolean containsQueryWord(Path path, String query) {

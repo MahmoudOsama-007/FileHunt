@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface SearchStrategy {
     List<Path> matchedFiles = new ArrayList<>();
-    public List<Path> search(String query, String path);
+    public List<Path> search(String query, Path path);
 }

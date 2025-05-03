@@ -11,8 +11,8 @@ import java.util.stream.Stream;
 public class SeqStreamNameFileSearch implements SearchStrategy {
 
     @Override
-    public List<Path> search(String query, String path) {
-        try(Stream<Path> stream = Files.walk(Paths.get(path))) {
+    public List<Path> search(String query, Path path) {
+        try(Stream<Path> stream = Files.walk(path)) {
             return stream.filter(p->Files.isRegularFile(p)&&filenameMatches(p,query)).toList();
         } catch (IOException e) {
             throw new RuntimeException(e);
